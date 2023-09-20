@@ -107,10 +107,7 @@ class MaskedMLP(nn.Module):
                 x = nn.relu(x)
                 x_conds = nn.relu(x_conds)
                 if self.dropout_rate is not None:
-                    if training:
-                        rng = self.make_rng('dropout')
-                    else:
-                        rng = None
+                    rng = self.make_rng('dropout') if training else None
                     x_conds = nn.Dropout(rate=self.dropout_rate)(
                         x_conds, deterministic=not training, rng=rng)
                     x = nn.Dropout(rate=self.dropout_rate)(

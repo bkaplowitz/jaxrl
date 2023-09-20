@@ -44,6 +44,6 @@ class DoubleCritic(nn.Module):
                              in_axes=None,
                              out_axes=0,
                              axis_size=self.num_qs)
-        qs = VmapCritic(self.hidden_dims,
-                        activations=self.activations)(states, actions)
-        return qs
+        return VmapCritic(self.hidden_dims, activations=self.activations)(
+            states, actions
+        )

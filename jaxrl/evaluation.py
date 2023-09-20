@@ -13,7 +13,7 @@ def evaluate(agent, env: gym.Env, num_episodes: int) -> Dict[str, float]:
         while not done:
             action = agent.sample_actions(observation, temperature=0.0)
             observation, _, done, info = env.step(action)
-        for k in stats.keys():
+        for k in stats:
             stats[k].append(info['episode'][k])
 
         if 'is_success' in info:

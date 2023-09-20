@@ -145,11 +145,10 @@ def _sample_actions(
     if distribution == 'det':
         return rng, actor_apply_fn({'params': actor_params}, observations,
                                    temperature)
-    else:
-        dist = actor_apply_fn({'params': actor_params}, observations,
-                              temperature)
-        rng, key = jax.random.split(rng)
-        return rng, dist.sample(seed=key)
+    dist = actor_apply_fn({'params': actor_params}, observations,
+                          temperature)
+    rng, key = jax.random.split(rng)
+    return rng, dist.sample(seed=key)
 
 
 def sample_actions(

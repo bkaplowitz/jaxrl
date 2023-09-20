@@ -87,11 +87,7 @@ class DrQLearner(object):
 
         action_dim = actions.shape[-1]
 
-        if target_entropy is None:
-            self.target_entropy = -action_dim
-        else:
-            self.target_entropy = target_entropy
-
+        self.target_entropy = -action_dim if target_entropy is None else target_entropy
         self.tau = tau
         self.target_update_period = target_update_period
         self.discount = discount

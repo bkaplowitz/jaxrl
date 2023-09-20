@@ -14,7 +14,7 @@ from jaxrl.wrappers.common import TimeStep
 
 
 def dmc_spec2gym_space(spec):
-    if isinstance(spec, OrderedDict) or isinstance(spec, dict):
+    if isinstance(spec, (OrderedDict, dict)):
         spec = copy.copy(spec)
         for k, v in spec.items():
             spec[k] = dmc_spec2gym_space(v)
@@ -87,7 +87,7 @@ class DMCEnv(core.Env):
                height: int = 84,
                width: int = 84,
                camera_id: int = 0):
-        assert mode == 'rgb_array', 'only support rgb_array mode, given %s' % mode
+        assert mode == 'rgb_array', f'only support rgb_array mode, given {mode}'
         return self._env.physics.render(height=height,
                                         width=width,
                                         camera_id=camera_id)

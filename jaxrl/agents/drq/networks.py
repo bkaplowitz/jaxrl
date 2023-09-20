@@ -30,10 +30,7 @@ class Encoder(nn.Module):
                         padding=self.padding)(x)
             x = nn.relu(x)
 
-        if len(x.shape) == 4:
-            x = x.reshape([x.shape[0], -1])
-        else:
-            x = x.reshape([-1])
+        x = x.reshape([x.shape[0], -1]) if len(x.shape) == 4 else x.reshape([-1])
         return x
 
 

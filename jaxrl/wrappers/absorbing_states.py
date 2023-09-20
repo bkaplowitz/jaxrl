@@ -35,11 +35,10 @@ class AbsorbingStatesWrapper(Wrapper):
             truncated_done = 'TimeLimit.truncated' in info
             return observation, reward, truncated_done, info
         else:
-            if not self._absorbing:
-                self._absorbing = True
-                return self._absorbing_state, 0.0, False, self._info
-            else:
+            if self._absorbing:
                 return self._absorbing_state, 0.0, True, self._info
+            self._absorbing = True
+            return self._absorbing_state, 0.0, False, self._info
 
 
 if __name__ == '__main__':
